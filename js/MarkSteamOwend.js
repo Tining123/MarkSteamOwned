@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.4
+// @version      2.5
 // @description  try to take over the world!
 // @author       Benzi
 // @require     http://libs.baidu.com/jquery/2.1.4/jquery.min.js
@@ -10,6 +10,7 @@
 // @match		 http://steam1.lequeshop.ru/
 // @match		 http://lastkey.ru/*
 // @match	 	 http://steamground.com/*
+// @match		http://steamkeyswhosales.com/
 // @run-at		 document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
@@ -188,6 +189,12 @@
     		
     		markOwned("img[src*='steam/apps/']",function(ele){
     			ele.parentElement.classList.add("bh_owned");
+    		});
+    	}
+    	
+    	if(url.indexOf("steamkeyswhosales.com") > -1){
+    		markOwned(".good-title > div[title*='store.steampowered.com/']", function(ele){
+  				ele.parentElement.parentElement.classList.add("bh_owned");
     		});
     	}
     	
