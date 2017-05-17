@@ -1,22 +1,22 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.5
+// @version      2.7
 // @description  try to take over the world!
 // @author       Benzi
-// @require     http://libs.baidu.com/jquery/2.1.4/jquery.min.js
+// @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
 // @match        http://steamfarmkey.ru/
 // @match		 http://keymarket.pw/
 // @match		 http://steam1.lequeshop.ru/
 // @match		 http://lastkey.ru/*
 // @match	 	 http://steamground.com/*
-// @match		http://steamkeyswhosales.com/
+// @match		 http://steamkeyswhosales.com/
 // @run-at		 document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
 // @connect      store.steampowered.com
 // @connect      www.steamgifts.com
-// @connect     steamdb.sinaapp.com
+// @connect      steamdb.sinaapp.com
 // @icon         http://store.steampowered.com/favicon.ico
 // ==/UserScript==
 
@@ -52,18 +52,24 @@
 	            }else{
 	            	mess = data;
 	            }
-	            var game_data = JSON.parse(mess);
-	            var history = game_data.price_history || {
-	                "bundles": {
-	                    "count": "-"
-	                }
-	            };
-	            var price = game_data.price_steam.price ||{
-	                "price":"NA"
-	            };
-	            var bundle = history.bundles.count;
-	    		var name = game_data.name;
-				markUnSgBundle(name,valid,price);
+	            try{
+	            	var game_data = JSON.parse(mess);
+		            var history = game_data.price_history || {
+		                "bundles": {
+		                    "count": "-"
+		                }
+		            };
+		            var price = game_data.price_steam.price ||{
+		                "price":"NA"
+		            };
+		            var bundle = history.bundles.count;
+		    		var name = game_data.name;
+					markUnSgBundle(name,valid,price);
+	            }catch(e){
+	            	//TODO handle the exception
+	            	throw(e.name);
+	            }
+	            
 	        }
 	    });
 	}	
