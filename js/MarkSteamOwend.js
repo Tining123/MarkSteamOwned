@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.7
+// @version      2.71
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
