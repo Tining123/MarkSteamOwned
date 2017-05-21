@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.71
+// @version      2.8
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
@@ -11,6 +11,7 @@
 // @match		 http://lastkey.ru/*
 // @match	 	 http://steamground.com/*
 // @match		 http://steamkeyswhosales.com/
+// @match		 http://alfakeys.ru/
 // @run-at		 document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
@@ -202,6 +203,13 @@
     		markOwned(".good-title > div[title*='store.steampowered.com/']", function(ele){
   				ele.parentElement.parentElement.classList.add("bh_owned");
     		});
+    	}
+    	
+    	if(url.indexOf("alfakeys.ru") > -1){
+    		markOwned(".good-title > div[title*='store.steampowered.com/']", function(ele){
+    			ele.parentElement.parentElement.classList.add("bh_owned");
+    		});
+    		
     	}
     	
     	if (url.indexOf("steamground.com/") > -1){
