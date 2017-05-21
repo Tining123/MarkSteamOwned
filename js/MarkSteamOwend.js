@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.8
+// @version      2.9
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
@@ -12,6 +12,7 @@
 // @match	 	 http://steamground.com/*
 // @match		 http://steamkeyswhosales.com/
 // @match		 http://alfakeys.ru/
+// @match 		 http://cheap-steam-games.ru/
 // @run-at		 document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
@@ -210,6 +211,13 @@
     			ele.parentElement.parentElement.classList.add("bh_owned");
     		});
     		
+    	}
+    	
+    	if(url.indexOf("cheap-steam-games.ru") > -1){
+    		markOwned("a[href*='/goods/info/'] > img[src*='steam/apps/']", function(ele){
+				var eles = ele.parentElement.parentElement.querySelectorAll("div[class='caption prod-caption']");
+				eles[0].classList.add("bh_owned");
+    		});
     	}
     	
     	if (url.indexOf("steamground.com/") > -1){
