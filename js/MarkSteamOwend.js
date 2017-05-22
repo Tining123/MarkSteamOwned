@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.9
+// @version      2.9a
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
@@ -196,7 +196,7 @@
     		}
     		
     		markOwned("img[src*='steam/apps/']",function(ele){
-    			ele.parentElement.classList.add("bh_owned");
+    			ele.parentElement.parentElement.parentElement.classList.add("bh_owned");
     		});
     	}
     	
