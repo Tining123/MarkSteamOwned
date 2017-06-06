@@ -1,18 +1,30 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      2.9a
+// @version      3.0
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
 // @match        http://steamfarmkey.ru/
 // @match		 http://keymarket.pw/
 // @match		 http://steam1.lequeshop.ru/
-// @match		 http://lastkey.ru/*
+// @match		 http://lastkey.ru/
+// @match        http://steam1.ru/
 // @match	 	 http://steamground.com/*
 // @match		 http://steamkeyswhosales.com/
 // @match		 http://alfakeys.ru/
 // @match 		 http://cheap-steam-games.ru/
+// @match        http://dmshop.lequeshop.ru/
+// @match        http://kartonanet.lequeshop.ru/
+// @match        http://keyssell.ru/
+// @match        http://keys.akens.ru/
+// @match        http://qoba.ru/
+// @match        http://rig4all.lequeshop.ru/
+// @match        http://steam-tab.ru/
+// @match        http://steamd.lequeshop.ru/
+// @match        http://steamkeys-shop.ru/
+// @match        http://steamkey.lequeshop.ru/
+// @match        http://steamkeystore.ru/
 // @run-at		 document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
@@ -103,7 +115,7 @@
 					var eleApps = document.querySelectorAll(query);
 					for (var i = 0; i < eleApps.length; i++)
 					{
-						var attrHref = eleApps[i].getAttribute("href") || eleApps[i].getAttribute("src") || eleApps[i].getAttribute("style") || eleApps[i].getAttribute("title");
+						var attrHref = eleApps[i].getAttribute("href") || eleApps[i].getAttribute("src") || eleApps[i].getAttribute("style") || eleApps[i].getAttribute("title") || eleApps[i].innerHTML;;
 						var ids = attrHref.match(rgxId);
 						if (ids != null)
 						{
@@ -181,7 +193,9 @@
     		});
     	}
     	
-    	if (url.indexOf("steam1.lequeshop.ru") > -1){
+    	if ((url.indexOf("steam1.lequeshop.ru")) > -1 || (url.indexOf("steam1.ru") > -1) || (url.indexOf("keyssell.ru") > -1)
+    			|| (url.indexOf("qoba.ru") > -1) || (url.indexOf("steam-tab.ru") > -1) || (url.indexOf("steamd.lequeshop.ru") > -1)
+    			|| (url.indexOf("steamkeystore.ru") > -1)){
     		markOwned("a[href*='/goods/info/'] > img[src*='steam/apps/']", function(ele){
 				var eles = ele.parentElement.parentElement.parentElement.querySelectorAll(".name");
 				eles[0].classList.add("bh_owned");
@@ -189,12 +203,10 @@
     	}
     	
     	if (url.indexOf("lastkey.ru") > -1){
-    		
     		var divs = document.querySelectorAll("div[class*='v_title br2 left']");
     		for (var i = 0;i < divs.length;i++) {
     			divs[i].style.backgroundColor="#AAAAAA";
     		}
-    		
     		markOwned("img[src*='steam/apps/']",function(ele){
     			ele.parentElement.parentElement.parentElement.classList.add("bh_owned");
     		});
@@ -217,6 +229,27 @@
     		markOwned("a[href*='/goods/info/'] > img[src*='steam/apps/']", function(ele){
 				var eles = ele.parentElement.parentElement.querySelectorAll("div[class='caption prod-caption']");
 				eles[0].classList.add("bh_owned");
+    		});
+    	}
+    	
+    	if(url.indexOf("keys.akens.ru") > -1){
+    		markOwned("div[class='good-description'] > span",function(ele){
+    			var eles = ele.parentElement.parentElement.parentElement.querySelectorAll("div[class='good-title good-animate']");
+    			eles[0].classList.add("bh_owned");
+    		});
+    	}
+    	
+    	if((url.indexOf("dmshop.lequeshop.ru") > -1) || (url.indexOf("kartonanet.lequeshop.ru") > -1) || (url.indexOf("rig4all.lequeshop.ru") > -1)
+    		|| (url.indexOf("steamkeys-shop.ru") > -1)){
+    		markOwned("a[href*='/goods/info/'] > img[src*='steam/apps/']", function(ele){
+    			ele.parentElement.parentElement.parentElement.classList.add("bh_owned");
+    		});
+    	}
+    	
+    	if(url.indexOf("steamkey.lequeshop.ru/") > -1){
+    		markOwned("a[href*='/goods/info/'] > img[src*='steam/apps/']", function(ele){
+    			var eles = ele.parentElement.querySelectorAll("p");
+    			eles[0].style.color = "#7CA156";
     		});
     	}
     	
