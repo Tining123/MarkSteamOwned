@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.1
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
@@ -25,6 +25,7 @@
 // @match        http://steamkeys-shop.ru/
 // @match        http://steamkey.lequeshop.ru/
 // @match        http://steamkeystore.ru/
+// @match		 http://steamfarmkey.lequestore.ru/
 // @run-at		 document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
@@ -250,6 +251,12 @@
     		markOwned("a[href*='/goods/info/'] > img[src*='steam/apps/']", function(ele){
     			var eles = ele.parentElement.querySelectorAll("p");
     			eles[0].style.color = "#7CA156";
+    		});
+    	}
+    	
+    	if(url.indexOf("steamfarmkey.lequestore.ru") > -1){
+    		markOwned("img[class='iconurl']",function(ele){
+    			ele.parentElement.parentElement.parentElement.classList.add("bh_owned");
     		});
     	}
     	
