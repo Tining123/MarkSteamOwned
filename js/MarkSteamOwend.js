@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MarkSteamOwned
 // @namespace    http://tampermonkey.net/
-// @version      3.1
+// @version      3.2
 // @description  try to take over the world!
 // @author       Benzi
 // @require      http://libs.baidu.com/jquery/2.1.4/jquery.min.js
@@ -82,7 +82,7 @@
 					markUnSgBundle(name,valid,price);
 	            }catch(e){
 	            	//TODO handle the exception
-	            	throw(e.name);
+	            	
 	            }
 	            
 	        }
@@ -97,7 +97,7 @@
 	function markOwned(query, markOwnedCallback)
 	{		
 		var rgxId = /[0-9]{3,}/g;
-		var rgxApp = /:\/\/((store\.steampowered|steamcommunity)\.com\/app|cdn.akamai.steamstatic.com\/steam\/apps|cdn.edgecast.steamstatic.com\/steam\/apps)\/[0-9]+/i;
+		var rgxApp = /:\/\/((store\.steampowered|steamcommunity)\.com\/app|cdn.akamai.steamstatic.com\/steam\/apps|cdn.edgecast.steamstatic.com\/steam\/apps|steamdb.info\/static\/camo\/apps)\/[0-9]+/i;
 		var rgxSub = /:\/\/store\.steampowered\.com\/sub\/[0-9]+/i;
 		GM_xmlhttpRequest(
 		{
@@ -182,8 +182,8 @@
     	var url = document.documentURI;
     	GM_addStyle(" .bh_owned { background-color: #7CA156 !important;transition: background 500ms ease 0s; }");
     	if (url.indexOf("steamfarmkey.ru") > -1){
-    		markOwned(".good-title > div[title*='store.steampowered.com/']", function(ele){
-  				ele.parentElement.parentElement.classList.add("bh_owned");
+    		markOwned("img[class='iconurl']",function(ele){
+    			ele.parentElement.parentElement.parentElement.classList.add("bh_owned");
     		});
     	}
     	
