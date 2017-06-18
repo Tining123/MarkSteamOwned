@@ -31,3 +31,7 @@
 <ul>
 <li>http://steamfarmkey.lequestore.ru/</li>
 </ul>
+<h3>2017-6-18 </h3>
+<ul>
+<li>steamfarmkey.lequestore.ru与steamfarmkey.ru指向相同批发站</li>
+</ul>
